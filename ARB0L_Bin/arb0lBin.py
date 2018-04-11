@@ -32,6 +32,4 @@ def listarEnArbol(arbol, lista):
     else:
         return listarEnArbol(insertar(arbol,lista[0]),lista[1:])
     
-   
-
 inOrden(listarEnArbol((ArbolBin(15,ArbolBin(10,ArbolBin(0)),ArbolBin(55, ArbolBin(25)))),[5,50,20,30,35,45,40]))
