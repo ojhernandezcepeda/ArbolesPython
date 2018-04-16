@@ -29,22 +29,17 @@ def buscarhijos(hijos,posicion):
         return False
     return buscar(hijos[0],posicion) or buscarhijos(hijos[1:],posicion)
 
-
-"""Buscamos la posicion x,y en la que se encuentra la 'x'"""
 def buscarX(laberinto):
    for x in laberinto:
        for y in range(len(x)):
            if x[y] == "x":
                colocarArbol(laberinto.index(x),y,laberinto, Nodo(0,0,[])) 
-
-
+                
 def colocarArbol(x,y,laberinto, arbol):
         raiz.setPosicion((x,y))
         arbol.setPosicion((x,y))
         raiz.setHijos([verIzquierda(x,y,arbol,laberinto),verAbajo(x,y,arbol,laberinto),verArriba(x,y,arbol,laberinto),verDerecha(x,y,arbol,laberinto)])
 
-   
-"""Se evaluan los movimentos hacia la derecha, izquierda, abajo y arriba mediante el uso de arboles"""
 def verDerecha(x,y,nodo,laberinto):
     print((x,y)," -> DERECHA")
     if(y+1<=len(laberinto[x])-1 and laberinto[x][y+1]!="1"):
