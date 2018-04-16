@@ -1,4 +1,3 @@
-"""Creamos una clase nodo para el manejo de arboles"""
 class Nodo():
     def __init__(self,valor,posicion,hijos=[]):
         self.valor=valor
@@ -36,12 +35,10 @@ def buscarX(laberinto):
    for x in laberinto:
        for y in range(len(x)):
            if x[y] == "x":
-               colocarArbol(laberinto.index(x),y,laberinto) 
+               colocarArbol(laberinto.index(x),y,laberinto, Nodo(0,0,[])) 
 
-raiz=Nodo(0,0,[])
-arbol=Nodo(0,0,[])
 
-def colocarArbol(x,y,laberinto):
+def colocarArbol(x,y,laberinto, arbol):
         raiz.setPosicion((x,y))
         arbol.setPosicion((x,y))
         raiz.setHijos([verIzquierda(x,y,arbol,laberinto),verAbajo(x,y,arbol,laberinto),verArriba(x,y,arbol,laberinto),verDerecha(x,y,arbol,laberinto)])
@@ -49,7 +46,7 @@ def colocarArbol(x,y,laberinto):
    
 """Se evaluan los movimentos hacia la derecha, izquierda, abajo y arriba mediante el uso de arboles"""
 def verDerecha(x,y,nodo,laberinto):
-    print((x,y),"der:")
+    print((x,y)," -> DERECHA")
     if(y+1<=len(laberinto[x])-1 and laberinto[x][y+1]!="1"):
         if(buscar(nodo,(x,y+1))!=True):
             nodo.agregarHijo(Nodo(laberinto[x][y+1],(x,y+1),[]))
@@ -60,7 +57,7 @@ def verDerecha(x,y,nodo,laberinto):
         return None
  
 def verIzquierda(x,y,nodo,laberinto):
-    print((x,y),"izq:")
+    print((x,y)," -> IZQUIERDA")
     if(y-1>=0 and laberinto[x][y-1]!="1"):
         if(buscar(nodo,(x,y-1))!=True):
             nodo.agregarHijo(Nodo(laberinto[x][y-1],(x,y-1),[]))
@@ -71,7 +68,7 @@ def verIzquierda(x,y,nodo,laberinto):
         return None
  
 def verAbajo(x,y,nodo,laberinto):
-    print((x,y),"abj:")
+    print((x,y)," -> ABAJO")
     if(x+1<=len(laberinto)-1 and laberinto[x+1][y]!="1"):
         if(buscar(nodo,(x+1,y))!=True):
             nodo.agregarHijo(Nodo(laberinto[x+1][y],(x+1,y),[]))
@@ -82,7 +79,7 @@ def verAbajo(x,y,nodo,laberinto):
         return None
  
 def verArriba(x,y,nodo,laberinto):
-    print((x,y),"arr:")
+    print((x,y)," -> ARRIBA")
     if(x-1>=0 and laberinto[x-1][y]!="1"):
         if(buscar(nodo,(x-1,y))!=True):
             nodo.agregarHijo(Nodo(laberinto[x-1][y],(x-1,y),[]))
@@ -105,6 +102,8 @@ def buscarhijosValor(hijos,valor):
         return False
     return buscarValor(hijos[0],valor) or buscarhijosValor(hijos[1:],valor)    
 
+"""PRUEBA DEL PROGRAMA"""
+raiz=Nodo(0,0,[])
 buscarX(cargarArchivo())
 
 if(buscarValor(raiz,"y")==True):
